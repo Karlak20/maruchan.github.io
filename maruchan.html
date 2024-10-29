@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Qué tipo de Maruchan eres?</title>
+    <style>
+        /* Estilos generales */
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Quicksand:wght@300;400;700&display=swap');
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: url('f.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #2c3e50;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1s;
+            overflow-x: hidden;
+        }
+        .quiz-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: slideIn 0.8s ease-in-out;
+        }
+        h1 {
+            color: #27ae60;
+            font-family: 'Lobster', cursive;
+            font-size: 2.8em;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+            animation: bounce 1s infinite alternate;
+        }
+        .logo {
+            max-width: 250px;
+            width: 100%;
+            margin: 0 auto 20px;
+            display: block;
+            animation: rotateIn 1.5s;
+        }
+        /* Estilos para el resultado */
+        .result {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0);
+            max-width: 80%;
+            text-align: center;
+            z-index: 2;
+            margin-top: -100px; /* Alineación al inicio del logo */
+            animation: fadeIn 0.5s, slideUp 0.5s;
+        }
+        .result img {
+            width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+        .result h2 {
+            font-size: 2.5em;
+            color: #27ae60;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            margin-top: 0;
+        }
+        .hidden { display: none; }
+        /* Animaciones */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+        @keyframes slideIn { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    </style>
+    <script>
+        function calculateResult() {
+            const answers = document.querySelectorAll('input[type="radio"]:checked');
+            let score = 0;
+            answers.forEach(answer => { score += parseInt(answer.value); });
+
+            // Ocultar logo y mostrar resultado
+            document.querySelector('.logo').classList.add('hidden');
+            document.querySelectorAll('.result').forEach(result => { result.style.display = 'none'; });
+
+            if (score <= 5) {
+                document.getElementById('result-camaron').style.display = 'block';
+            } else if (score <= 10) {
+                document.getElementById('result-camaron-limon').style.display = 'block';
+            } else if (score <= 15) {
+                document.getElementById('result-camaron-limon-habanero').style.display = 'block';
+            } else {
+                document.getElementById('result-camaron-chile-piquin').style.display = 'block';
+            }
+            window.scrollTo(0, 0);
+        }
+    </script>
+</head>
+<body>
+    <div class="quiz-container">
+        <img class="logo" src="logo.png" alt="Logo de la empresa">
+        <h1>¿Qué tipo de Maruchan eres? 🍜</h1>
+        <p style="font-size: 1.2em; font-weight: bold;">OJO: <strong>Pollo es gratis tu compra.</strong> 🐔</p>
+
+        <!-- Resultados -->
+        <div class="result" id="result-camaron">
+            <img src="camaron.webp" alt="Camarón">
+            <h2>Camarón 🦐</h2>
+            <p>¡El ligador de la fiesta! Con una actitud despreocupada y el ego hasta el cielo, siempre buscando quién cae. "¿Y si sí? ¿Y si no? ¡Pero qué tal si sí!"</p>
+        </div>
+        <div class="result" id="result-camaron-limon">
+            <img src="limon.webp" alt="Camarón con Limón">
+            <h2>Camarón con Limón 🍋🦐</h2>
+            <p>¡El alma del desmadre! Siempre con una sonrisa y una bebida en mano. Aunque tengas que llegar temprano, solo te ríes y dices: "¡El regaño es el mismo si llego mañana, a seguir bebiendo!"</p>
+        </div>
+        <div class="result" id="result-camaron-limon-habanero">
+            <img src="habanero.webp" alt="Camarón con Limón y Habanero">
+            <h2>Camarón con Limón y Habanero 🌶️🍋🦐</h2>
+            <p>El picante de la fiesta, ¡imparable! Con energía y actitud, haces que todos sientan tu intensidad. ¡No hay fiesta si no estás tú!</p>
+        </div>
+        <div class="result" id="result-camaron-chile-piquin">
+            <img src="piquin.webp" alt="Camarón con Chile Piquín">
+            <h2>Camarón con Chile Piquín 🌶️🦐</h2>
+            <p>¡El rey del shooooot! Con energía contagiosa, conviertes cualquier fiesta en una noche inolvidable, siempre diciendo "¡Yo nunca paro!"</p>
+        </div>
+
+        <!-- Preguntas -->
+        <div class="question">
+            <p>¿Qué haces en una fiesta?</p>
+            <label class="option"><input type="radio" name="q1" value="1"> Ligar y ver quién cae</label>
+            <label class="option"><input type="radio" name="q1" value="2"> Hacer el ridículo borrach@</label>
+            <label class="option"><input type="radio" name="q1" value="3"> Comer</label>
+            <label class="option"><input type="radio" name="q1" value="4"> Lo normal</label>
+        </div>
+        <div class="question">
+            <p>¿Qué bebida prefieres?</p>
+            <label class="option"><input type="radio" name="q2" value="1"> Miche</label>
+            <label class="option"><input type="radio" name="q2" value="2"> Mojos</label>
+            <label class="option"><input type="radio" name="q2" value="3"> Cerveza, como tú: amarg@ y sol@</label>
+            <label class="option"><input type="radio" name="q2" value="4"> Pura botella (fresón)</label>
+        </div>
+        <div class="question">
+            <p>¿Cuál es tu botana favorita?</p>
+            <label class="option"><input type="radio" name="q3" value="1"> Chicharrones</label>
+            <label class="option"><input type="radio" name="q3" value="2"> Papitas como tú: salad@</label>
+            <label class="option"><input type="radio" name="q3" value="3"> Lo que sea pero picoso</label>
+        </div>
+
+        <button onclick="calculateResult()">Ver Resultado</button>
+    </div>
+</body>
+</html>
+
